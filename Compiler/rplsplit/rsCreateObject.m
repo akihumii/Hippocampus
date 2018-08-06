@@ -173,13 +173,13 @@ end
 
 function submitJob(Args)
 if ~Args.UseHPC % swap between the HPC and HTCondor
-    cmdPath = 'condor_submit ~/cbin/';
+    cmdPath = ['condor_submit ',fullfile('~','cbin')];
     cmdScript = '';
 else
-    cmdPath = 'qsub $GITHUB_MATLAB/Hippocampus/Compiler/hplfp/';
+    cmdPath = ['qsub ',fullfile('$GITHUB_MATLAB','Hippocampus','Compiler','hplfp')];
     cmdScript = 'HPC';
 end
 disp('Launching eyehplfp scripts...')
-cmdSubmit = [cmdPath, 'eyehplfp', cmdScript, '_submit_file.txt'];
-system(['source ~/.bash_profile;', cmdSubmit]);
+cmdSubmit = [cmdPath, filesep, 'eyehplfp', cmdScript, '_submit_file.txt'];
+system(['source ',fullfile('~','.bash_profile'),'; ', cmdSubmit]);
 end
