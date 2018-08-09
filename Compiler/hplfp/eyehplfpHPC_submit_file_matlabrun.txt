@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#PBS -q matlab
+#PBS -l select=1:ncpus=1:mem=10GB
+
+cd $PBS_O_WORKDIR
+
+source /etc/profile.d/rec_modules.sh
+
+source ~/.bashrc
+cp $GITHUB_MATLAB/Hippocampus/Compiler/hplfp/run_eyehplfp.sh .
+cp $GITHUB_MATLAB/Hippocampus/Compiler/hplfp/eyehplfp .
+matlab-run run_eyehplfp.sh
+rm run_eyehplfp.sh eyehplfp
